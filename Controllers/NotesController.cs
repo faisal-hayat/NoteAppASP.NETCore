@@ -66,7 +66,6 @@ namespace NoteApp.Controllers
 
         #region Add Note
         [HttpPost]
-
         public async Task<IActionResult> Add(Note note)
         {
             if (!ModelState.IsValid)
@@ -82,6 +81,34 @@ namespace NoteApp.Controllers
 
                 return CreatedAtAction(nameof(GetById), new {id = note.Id}, note);
             }
+        }
+        #endregion
+
+        #region Update
+        [HttpPut]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> Update([FromRoute] Guid id, Note note)
+        {
+            if (_dbContext.Notes == null)
+            {
+                return NotFound();
+            }
+
+            Note obj = await _dbContext.Notes.FindAsync(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            obj.Title = note.Title;
+            obj.Description = note.Description;
+            obj.IsVisible = note.IsVisible;
+            // here we will update the note
+            _dbContext.Update(obj);
+            await _dbContext.SaveChangesAsync();
+
+            // after updating the "note", we will be 
+            return Ok(obj);
         }
         #endregion
     }

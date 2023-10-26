@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NoteApp.Data;
+using NoteApp.Models.Entities;
 
 namespace NoteApp.Controllers
 {
@@ -14,7 +15,7 @@ namespace NoteApp.Controllers
         {
             _dbContext = dbContext;
         }
-
+        #region Get All
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -22,12 +23,44 @@ namespace NoteApp.Controllers
             if (_dbContext.Notes != null)
             {
                 var obj = await _dbContext.Notes.ToListAsync();
-                return Ok(obj);
+                if (obj == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(obj);
+                }
             }
             else
             {
-                return BadRequest("No Notes exist in database.");
+                return NotFound();
             }
+        }
+        #endregion
+
+        #region Get By ID
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
+        {
+            if (_dbContext.Notes == null || id == null)
+            {
+                return BadRequest("either notes does not exist or id is not correct");
+            }
+            else
+            {
+                Note note = await _dbContext.Notes.FirstOrDefaultAsync(u => u.Id == id);
+                if (note == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(note);
+                }
+            }
+            #endregion
         }
     }
 }

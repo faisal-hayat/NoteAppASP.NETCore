@@ -42,6 +42,7 @@ namespace NoteApp.Controllers
         #region Get By ID
         [HttpGet]
         [Route("{id:Guid}")]
+        [ActionName("GetById")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             if (_dbContext.Notes == null || id == null)
@@ -60,7 +61,28 @@ namespace NoteApp.Controllers
                     return Ok(note);
                 }
             }
-            #endregion
         }
+        #endregion
+
+        #region Add Note
+        [HttpPost]
+
+        public async Task<IActionResult> Add(Note note)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                note.Id = new Guid();
+
+                await _dbContext.Notes.AddAsync(note);
+                await _dbContext.SaveChangesAsync();
+
+                return CreatedAtAction(nameof(GetById), new {id = note.Id}, note);
+            }
+        }
+        #endregion
     }
 }

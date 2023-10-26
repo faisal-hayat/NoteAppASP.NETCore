@@ -18,3 +18,9 @@ dotnet build NoteApp.sln
 ```
 
 --- ---
+
+## Future Work 
+
+- Use **_Repository Pattern_** for database operations
+
+--- ---

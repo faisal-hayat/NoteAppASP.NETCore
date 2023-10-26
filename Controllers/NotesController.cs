@@ -111,5 +111,28 @@ namespace NoteApp.Controllers
             return Ok(obj);
         }
         #endregion
+
+        #region Delete
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
+            if (_dbContext.Notes == null)
+            {
+                return NotFound();
+            }
+            var obj = await _dbContext.Notes.FindAsync(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            // This is where we will try to
+            _dbContext.Notes.Remove(obj);
+            await _dbContext.SaveChangesAsync();
+
+            return Ok("Objcect Removed");
+        }
+        #endregion
     }
 }

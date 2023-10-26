@@ -1,20 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NoteApp.Data;
-using NoteApp.Models.Entities;
+using NotesAPI.Data;
+using NotesAPI.Models;
 
-namespace NoteApp.Controllers
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace NotesAPI.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
-    public class NotesController : Controller
-    {
+    [ApiController]
+    public class NoteController : ControllerBase
+    {        
         private readonly ApplicationDbContext _dbContext;
 
-        public NotesController(ApplicationDbContext dbContext)
+        public NoteController( ApplicationDbContext dbContext )
         {
-            _dbContext = dbContext;
+            _dbContext= dbContext;
         }
+
         #region Get All
         [HttpGet]
         public async Task<IActionResult> GetAll()
@@ -79,7 +82,7 @@ namespace NoteApp.Controllers
                 await _dbContext.Notes.AddAsync(note);
                 await _dbContext.SaveChangesAsync();
 
-                return CreatedAtAction(nameof(GetById), new {id = note.Id}, note);
+                return CreatedAtAction(nameof(GetById), new { id = note.Id }, note);
             }
         }
         #endregion

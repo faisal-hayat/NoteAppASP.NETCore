@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace NoteApp.Migrations
+namespace NotesAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class notetableaddedtodb : Migration
+    public partial class notestablehasbeenaddedinAPI : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

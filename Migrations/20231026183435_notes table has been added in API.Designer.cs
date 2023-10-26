@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NoteApp.Data;
+using NotesAPI.Data;
 
 #nullable disable
 
-namespace NoteApp.Migrations
+namespace NotesAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231026131419_note table added to db")]
-    partial class notetableaddedtodb
+    [Migration("20231026183435_notes table has been added in API")]
+    partial class notestablehasbeenaddedinAPI
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace NoteApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("NoteApp.Models.Entities.Note", b =>
+            modelBuilder.Entity("NotesAPI.Models.Note", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

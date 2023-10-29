@@ -15,8 +15,19 @@ body{
 .notes__sidebar{
     width: 400px;
     height: 100vh;
-    border-radius: 2px solid #020202;
+    border-right: 2px solid #000000;
     background-color: antiquewhite;
+    margin-left: 0%;
+}
+
+.notes__sidebar input, textarea{
+    width: 100%;
+    resize: none;
+}
+
+.notes__sidebar textarea{
+    max-height: 10%;
+    resize: none;
 }
 
 /* notes contaier */

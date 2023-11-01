@@ -44,6 +44,25 @@
 ## How to Consume RESTful API in ASP.NET Core application ?
 
 - Web API method can be consumed using **_HttpClient_** class.
-- 
+
+--- ---
+
+## Difference b/w WebAPI and MVC Controller.
+
+- MVC controller is derived from Controller class and WebAPI controller is derived from Apicontroller.
+- MVC controller has View Support whereas ApiController does not support Views.
+```{c#}
+[Route("controller")]
+public HomeController: Controller{
+}
+```
+
+```{c#}
+[ApiController]
+[Route("controller")]
+public HomeController: ControllerBase{
+}
+```
+
 
 --- ---

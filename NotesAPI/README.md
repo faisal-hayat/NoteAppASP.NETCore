@@ -40,3 +40,10 @@
 - A Service written using REST principle is called RESTful.
 
 --- ---
+
+## How to Consume RESTful API in ASP.NET Core application ?
+
+- Web API method can be consumed using **_HttpClient_** class.
+- 
+
+--- ---
